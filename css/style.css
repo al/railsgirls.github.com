@@ -245,3 +245,28 @@ i.icon-small-prompt{
 i.icon-small-browser {
   background-image: url("/images/icon-small-browser.png");
 }
+
+.aside {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background-color: #F5F5F5;
+  border: solid 1px #CCCCCC;
+  color: #666666;
+  margin-bottom: 1em;
+  padding: 10px
+}
+
+.aside .toggle {
+  color: inherit;
+  font-size: 1.2em;
+}
+
+.aside .aside-inner {
+  display: none;
+  margin-top: 1em;
+}
+
+.aside .aside-inner p {
+  font-size: 0.9em;
+}
