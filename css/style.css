@@ -246,6 +246,18 @@ i.icon-small-browser {
   background-image: url("/images/icon-small-browser.png");
 }
 
+div.img {
+  margin: 3em 0;
+  text-align: center;
+}
+
+div.img p {
+  border: solid 1px #CCCCCC;
+  max-width: 100%;
+  overflow-x: scroll;
+  padding: 1em;
+}
+
 .aside {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;

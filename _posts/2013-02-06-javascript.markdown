@@ -8,11 +8,39 @@ permalink: app/extensions/javascript
 
 **By this stage you should have your app running.** If not [**follow the app tutorial**](/app) and then come back here.
 
-## Prologue
+## Introduction
 
-*High-level overview of what Javascript is, where it fits into the HTML/CSS/Rails jigsaw, and the kinds of things you can do with it goes here. Words like progressive enhancement, etc. might be used.*
+So far we've been writing code that runs on the server. A user does something in their web browser which causes a *request* to be sent to our Rails app (on the server). Our app reacts to the request by constructing a *response* (which so far in our case has been made up of HTML and some CSS) and sending it back. The user's browser then displays the result. Happy days.
 
-**Summary**: In this tutorial we are going to add a little bit of Javascript to the app. When we are finished, should be able to do some basic validation of user input. If a required field in your form is omitted, the user will be shown an error message and will not be allowed to proceed until they have corrected it. This will all happen on the client-side, i.e. in the browser, without contacting the Rails app on the server. When done well, this type of thing can make filling in a form a much nicer experience for your users.
+But it turns out we aren't limited to this. These days all web browsers have the ability to run code too, using a language called [Javascript](http://en.wikipedia.org/wiki/JavaScript). 
+
+When our Rails app is sending back the HTML and CSS to the browser, it can also send along some Javascript. After the browser has displayed the page it will start running the Javascript.
+
+Javascript is a completely separate language to Ruby and the syntax is quite different, but it's easy enough to get started with and that's what we're going to be doing here.
+
++--{.aside}
+<a class="toggle" href="javascript: void(0);">Terminology</a>
+
++--{.aside-inner}
+Because we often use the term *client* to refer to the user or their browser, this type of programming is called *client-side scripting* to distinguish it from the *server-side* programming that we've been doing so far.
+=--
+=--
+
++--{.aside}
+<a class="toggle" href="javascript: void(0);">Aside: Why Javascript</a>
+
++--{.aside-inner}
+The obvious question is why would we want to do this? What does Javascript bring to the table?
+
+Well, for one Javascript lets us make targeted change to parts of a webpage rather than doing a full page reload, creating a user-experience that just isn't possible otherwise. We can even apply different types of visual effects when doing so.
+
+Another good reason to use Javascript is speed. Sometimes it's just not necessary to go through the whole process of sending a request over the Internet, having a server generate a response and send it back, and updating your page. If something can be done wholly on the client-side, without contacting the server the user will have a snappier experience, and our servers won't be bogged down processing unnecessary requests.
+
+And often you'll find that Javascript is just a better fit for the problem you are trying to solve, providing an easier and more elegant solution than any one that involves server-side code.
+=--
+=--
+
+**The Plan**: In this tutorial we are going to add a little bit of Javascript to our app, which will check to make sure that the user has filled in all the required fields in our forms **before** we allow the browser to contact the server. We call this *client-side validation*, and you have no doubt experienced it on many websites.
 
 ## *1.*Saying Hello!
 
@@ -24,7 +52,9 @@ alert("Hello Rails Girls");
 
 Open [http://localhost:3000/ideas](http://localhost:3000/ideas) in your browser and you should be presented with something like
 
-![Alert](/images/app/extensions/javascript/alert.jpg "Alert")
++--{.img}
+![](/images/app/extensions/javascript/step-1.jpg)
+=--
 
 +--{.aside}
 <a class="toggle" href="javascript: void(0);">Aside: What just happened?</a>
@@ -63,6 +93,10 @@ $(document).ready(function() {
 {% endhighlight %}
 
 Now when you go to [http://localhost:3000/ideas/new](http://localhost:3000/ideas/new) nothing should happen until you click the submit button which should bring up your alert again.
+
++--{.img}
+![](/images/app/extensions/javascript/step-2.jpg)
+=--
 
 +--{.aside}
 <a class="toggle" href="javascript: void(0);">Aside: jQuery</a>
@@ -228,6 +262,10 @@ $(document).ready(function() {
 
 Now if you try to submit your form with a blank name you should see your error message appear near by.
 
++--{.img}
+![](/images/app/extensions/javascript/step-4.jpg)
+=--
+
 +--{.aside}
 <a class="toggle" href="javascript: void(0);">Aside: Explanation</a>
 
@@ -315,6 +353,21 @@ After all the tests have been performed we `return isValid;`. Remember that `isV
 =--
 =--
 
-## Epilogue
+## Conclusion
 
-*Some kind of closing statements, probably of the inspirational kind, i.e. you can do this and that and could even write your entire front end in Javascript. Indeed you can even use Javascript in the backend these days, etc.*
+Javascript is a very powerful component of your toolbox as a web developer. With a small amount of fairly simple code you can use it to transform a nice website into a great website. Take some time to play with it and [google it](https://www.google.ie/search?q=brilliant+uses+of+javascript) and see how others are using it.
+
+Try to use Javascript to *progressively enhance* the goodness of your app &hellip; Make your apps good without Javascript, then make them awesome with it.
+
+Above all, experiment.
+
+The value of a firm understanding of Javascript is ever increasing and employers these days are crying out for talented JS developers.
+
+There are a [growing](http://backbonejs.org/) [number](http://angularjs.org/) of [libraries](http://emberjs.com/) that enable you to write the *entire* front-end of your web apps in Javascript. It can be used to [create mobile apps](http://www.appcelerator.com/platform/titanium-platform/) that work on both iPhone and Android. It has even become possible to write your [servers in Javascript](http://nodejs.org/)!
+
+Finally, here are a couple of handy links you might want to check out.
+
+* [http://api.jquery.com/](http://api.jquery.com/) The jQuery documentation
+* [http://jqueryui.com/](http://jqueryui.com/) jQuery UI gives you access to lots of lovely bits of Javascript goodness for you interfaces
+* [https://developer.mozilla.org/en-US/docs/JavaScript](https://developer.mozilla.org/en-US/docs/JavaScript) The Mozilla Javascript documentation
+* [http://jsfiddle.net/](http://jsfiddle.net/) JSFiddle is a great place to test small bits of Javascript, particularly if you need to share an example with someone
