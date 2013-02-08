@@ -6,6 +6,8 @@ permalink: app/extensions/javascript
 
 # Extending your Rails Girls App with Javascript
 
+*by Alan, [@a_l_a_n](https://twitter.com/a_l_a_n)*
+
 **By this stage you should have your app running.** If not [**follow the app tutorial**](/app) and then come back here.
 
 ## Introduction

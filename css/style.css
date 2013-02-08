@@ -246,6 +246,10 @@ i.icon-small-browser {
   background-image: url("/images/icon-small-browser.png");
 }
 
+h1 {
+  line-height: 1.2em;
+}
+
 div.img {
   margin: 3em 0;
   text-align: center;
