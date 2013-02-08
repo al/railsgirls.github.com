@@ -286,3 +286,8 @@ div.img p {
 .aside .aside-inner p {
   font-size: 0.9em;
 }
+
+.highlight .hll {
+  background-color: #FFFFCC;
+  padding: 3px 3px 1px;
+}
