@@ -19,10 +19,12 @@ When our Rails app is sending back the HTML and CSS to the browser, it can also 
 Javascript is a completely separate language to Ruby and the syntax is quite different, but it's easy enough to get started with and that's what we're going to be doing here.
 
 +--{.aside}
-<a class="toggle" href="javascript: void(0);">Terminology</a>
+<a class="toggle" href="javascript: void(0);">Aside: Terminology</a>
 
 +--{.aside-inner}
 Because we often use the term *client* to refer to the user or their browser, this type of programming is called *client-side scripting* to distinguish it from the *server-side* programming that we've been doing so far.
+
+You will also encounter the name *Coffeescript*. [Coffeescript](http://coffeescript.org/) is another language that you can use to create Javascript. It's very nice and support for it is built into Rails, but we'll be using pure Javascript today.
 =--
 =--
 
@@ -34,7 +36,7 @@ The obvious question is why would we want to do this? What does Javascript bring
 
 Well, for one Javascript lets us make targeted change to parts of a webpage rather than doing a full page reload, creating a user-experience that just isn't possible otherwise. We can even apply different types of visual effects when doing so.
 
-Another good reason to use Javascript is speed. Sometimes it's just not necessary to go through the whole process of sending a request over the Internet, having a server generate a response and send it back, and updating your page. If something can be done wholly on the client-side, without contacting the server the user will have a snappier experience, and our servers won't be bogged down processing unnecessary requests.
+Another good reason to use Javascript is speed. Sometimes it's just not necessary to go through the whole process of sending a request over the Internet, having a server generate a response and send it back, and updating your page. If something can be done wholly on the client-side, without contacting the server, the user will have a snappier experience and our servers won't be bogged down processing unnecessary requests.
 
 And often you'll find that Javascript is just a better fit for the problem you are trying to solve, providing an easier and more elegant solution than any one that involves server-side code.
 =--
@@ -112,7 +114,7 @@ $(document).ready(function() {
 });
 {% endhighlight %}
 
-This will become second nature to you. All it does is make sure that your browser has finished displaying your page before it tries to run you your scripts, otherwise they might not work the way you intended.
+This will become second nature to you. All it does is make sure that your browser has finished displaying your page before it tries to run your scripts, otherwise they might not work the way you intended.
 =--
 =--
 
@@ -120,14 +122,14 @@ This will become second nature to you. All it does is make sure that your browse
 <a class="toggle" href="javascript: void(0);">Aside: jQuery Selectors</a>
 
 +--{.aside-inner}
-A key feature of jQuery is being able to access parts of your webpages using *selectors* which are very much like the selectors you have already seen used in CSS.
+A key feature of jQuery is being able to access parts of your webpage using *selectors*, which are very much like the selectors [you have already seen](http://guides.railsgirls.com/app/#3design) used in CSS.
 
 In the code we just added we selected the `<form>` tag on our page by writing `$("form")`.
 
 To select other parts of the page we just need to change the stuff in between the quotation marks.
 
 * To select every `<div>` on the page, we would write `$("div")`
-* To select every link (`<a>`) on the page, we would write `$("a")`
+* To select every link (`<a>` tag) on the page, we would write `$("a")`
 * To select the element of the page that has `id="idea_name"`, we would write `$("#idea_name")`
 * To select every element of the page that has `class="field"`, we would write `$(".field")`
 
@@ -161,7 +163,7 @@ There are [lots of events](http://api.jquery.com/category/events/) that get trig
 
 ## *3.*Being Useful
 
-Popping up an alert box every time you submit the form isn't really very useful &hellip; in fact, it's going to get pretty annoying pretty quickly.
+Popping up an alert box every time we submit the form isn't really very useful &hellip; in fact, it's going to get pretty annoying pretty quickly.
 
 Let's modify our Javascript to implement some basic *client-side validation* instead. We'll prevent the user from submitting the form unless they have filled in the name field.
 
@@ -232,7 +234,7 @@ form .error {
 }
 {% endhighlight %}
 
-Finally modify you Javascript to insert a helpful error message into this new `<span>` as required:
+Finally modify your Javascript to insert a helpful error message into this new `<span>` as required:
 
 {% highlight javascript %}
 $(document).ready(function() {
@@ -260,7 +262,7 @@ $(document).ready(function() {
 });
 {% endhighlight %}
 
-Now if you try to submit your form with a blank name you should see your error message appear near by.
+Now if you try to submit the form with a blank name you should see your error message appear near by.
 
 +--{.img}
 ![](/images/app/extensions/javascript/step-4.jpg)
@@ -284,7 +286,7 @@ Try changing the `show` and `hide` methods to `fadeIn` and `fadeOut`, or `slideD
 
 So far we have only required that a name be supplied. An Idea isn't much without some kind of description, so let's require that the description field be filled in too.
 
-We'll use the same basic logic, but this time we need check both fields, and at the end cancel the form submission if either one of them is blank.
+We'll use the same basic logic, but this time we need to check both fields, and at the end cancel the form submission if either one of them is blank.
 
 To being with we'll need to add an error container for the description field, so insert this after `<%= f.text_area :description %>` in your form template:
 
@@ -332,7 +334,7 @@ $(document).ready(function() {
 });
 {% endhighlight %}
 
-Now test it out. Remember to try all possible scenarios to be sure it's working correctly;
+Now test it out. Remember to try all possible scenarios to be sure it's working correctly.
 
 * name blank, description not blank
 * name not blank, description blank
@@ -345,17 +347,21 @@ Now test it out. Remember to try all possible scenarios to be sure it's working 
 +--{.aside-inner}
 Firstly, notice how the two sections `// Make sure name is not blank`, and `// Make sure description is not blank` are almost identical. The only difference is which field each of them is concerned about.
 
-The biggest difference to what we had done before this is that we no longer `return false;` immediately when we encounter an error. If we did, then an error in the name field would prevent us from checking the description field and only one message would be displayed even if they were both invalid. That would be a bad user experience.
+The biggest change is that we now no longer `return false` immediately when we encounter an error. If we did, then an error in the name field would prevent us from checking the description field and only one message would be displayed even if they were both invalid. That would be a bad user experience.
 
 Instead we use a new variable called `isValid`. Initially we set this to `true`. If we encounter an error, either in the name tests, or the description tests, we set it to `false`. In this was the `isValid` variable lets us *remember* whether or not we have detected any problems to date.
 
-After all the tests have been performed we `return isValid;`. Remember that `isValid` will either still be `true`, implying that no problems were found and thus will not prevent the submission of the form, or `false`, meaning that at least one problem was found and will stop the form from being submitted.
+After all the tests have been performed we `return isValid`. Remember that `isValid` will either still be `true`, implying that no problems were found and thus will not prevent the submission of the form, or `false`, meaning that at least one problem was found and will stop the form from being submitted.
 =--
 =--
 
 ## Conclusion
 
-Javascript is a very powerful component of your toolbox as a web developer. With a small amount of fairly simple code you can use it to transform a nice website into a great website. Take some time to play with it and [google it](https://www.google.ie/search?q=brilliant+uses+of+javascript) and see how others are using it.
+That's it. We have added some basic validation that will help guide the user to filling in our forms correctly before contacting the server.
+
+It's nothing too exciting, but hopefully by now you have a feeling for what it's like to program in Javascript/jQuery. Don't worry if some things are a little confusing, it all becomes clear with practice and you can always **ask a coach** if anything we've done needs a little more explanation.
+
+Javascript is a very powerful component of your toolbox as a web developer. With a small amount of code you can use it to transform a nice website into a great website. Take some time to play with it and [google it](https://www.google.ie/search?q=brilliant+uses+of+javascript) and [see](http://www.drawastickman.com/) [how](http://www.jamwithchrome.com/) [others](http://tenxer.github.com/xcharts/examples/) [are](http://creativejs.com/2013/02/elevated-a-beautiful-mountain-fly-through-demo-in-28kb-of-javascript/) [using it](http://bartaz.github.com/impress.js).
 
 Try to use Javascript to *progressively enhance* the goodness of your app &hellip; Make your apps good without Javascript, then make them awesome with it.
 
@@ -363,11 +369,12 @@ Above all, experiment.
 
 The value of a firm understanding of Javascript is ever increasing and employers these days are crying out for talented JS developers.
 
-There are a [growing](http://backbonejs.org/) [number](http://angularjs.org/) of [libraries](http://emberjs.com/) that enable you to write the *entire* front-end of your web apps in Javascript. It can be used to [create mobile apps](http://www.appcelerator.com/platform/titanium-platform/) that work on both iPhone and Android. It has even become possible to write your [servers in Javascript](http://nodejs.org/)!
+There are a [growing](http://backbonejs.org/) [number](http://angularjs.org/) [of](http://emberjs.com/) [libraries](http://meteor.com/) that enable you to write the *entire* front-end of your web apps in Javascript. It can be used to [create mobile apps](http://www.appcelerator.com/platform/titanium-platform/) that work on both iPhone and Android. It has even become possible to write your [servers in Javascript](http://nodejs.org/)!
 
-Finally, here are a couple of handy links you might want to check out.
+Here are a couple of handy links you might want to check out.
 
 * [http://api.jquery.com/](http://api.jquery.com/) The jQuery documentation
 * [http://jqueryui.com/](http://jqueryui.com/) jQuery UI gives you access to lots of lovely bits of Javascript goodness for you interfaces
 * [https://developer.mozilla.org/en-US/docs/JavaScript](https://developer.mozilla.org/en-US/docs/JavaScript) The Mozilla Javascript documentation
 * [http://jsfiddle.net/](http://jsfiddle.net/) JSFiddle is a great place to test small bits of Javascript, particularly if you need to share an example with someone
+* [http://railscasts.com/](http://railscasts.com/episodes?utf8=%E2%9C%93&search=javascript) [Ryan Bates](https://twitter.com/rbates) produces great tutorials for Rails users, but he also uses Javascript in a lot of his RailsCasts
