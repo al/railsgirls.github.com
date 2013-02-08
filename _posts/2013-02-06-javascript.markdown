@@ -36,7 +36,7 @@ You will also encounter the name *Coffeescript*. [Coffeescript](http://coffeescr
 +--{.aside-inner}
 The obvious question is why would we want to do this? What does Javascript bring to the table?
 
-Well, for one Javascript lets us make targeted change to parts of a webpage rather than doing a full page reload, creating a user-experience that just isn't possible otherwise. We can even apply different types of visual effects when doing so.
+Well, for one Javascript lets us make targeted changes to parts of a webpage rather than doing a full page reload, creating a user-experience that just isn't possible otherwise. We can even apply different types of visual effects when doing so.
 
 Another good reason to use Javascript is speed. Sometimes it's just not necessary to go through the whole process of sending a request over the Internet, having a server generate a response and send it back, and updating your page. If something can be done wholly on the client-side, without contacting the server, the user will have a snappier experience and our servers won't be bogged down processing unnecessary requests.
 
@@ -54,7 +54,7 @@ Open `app/assets/javascripts/application.js` in your text editor and add this li
 alert("Hello Rails Girls");
 {% endhighlight %}
 
-Open [http://localhost:3000/ideas](http://localhost:3000/ideas) in your browser and you should be presented with something like
+Open [http://localhost:3000/ideas](http://localhost:3000/ideas) in your browser and you should be presented with something like this.
 
 +--{.img}
 ![](/images/app/extensions/javascript/step-1.jpg)
@@ -106,7 +106,7 @@ Now when you go to [http://localhost:3000/ideas/new](http://localhost:3000/ideas
 <a class="toggle" href="javascript: void(0);">Aside: jQuery</a>
 
 +--{.aside-inner}
-[jQuery](http://jquery.com/) is a very popular library that makes doing things in Javascript much easier. Rails adds jQuery to your applications by default so you don't need to do anything to special to enable it.
+[jQuery](http://jquery.com/) is a very popular library that makes doing things in Javascript much easier. Rails adds jQuery to your applications by default so you don't need to do anything special to enable it.
 
 As a general rule, you should always wrap your jQuery code like so:
 
@@ -349,9 +349,9 @@ Now test it out. Remember to try all possible scenarios to be sure it's working 
 +--{.aside-inner}
 Firstly, notice how the two sections `// Make sure name is not blank`, and `// Make sure description is not blank` are almost identical. The only difference is which field each of them is concerned about.
 
-The biggest change is that we now no longer `return false` immediately when we encounter an error. If we did, then an error in the name field would prevent us from checking the description field and only one message would be displayed even if they were both invalid. That would be a bad user experience.
+The biggest change is that we now no longer `return false` immediately when we encounter an error. If we did, then an error in the name field would prevent us from checking the description field and only one message would be displayed even if they were both invalid. That would be a bad user-experience.
 
-Instead we use a new variable called `isValid`. Initially we set this to `true`. If we encounter an error, either in the name tests, or the description tests, we set it to `false`. In this was the `isValid` variable lets us *remember* whether or not we have detected any problems to date.
+Instead we use a new variable called `isValid`. Initially we set this to `true`. If we encounter an error, either in the name tests, or the description tests, we set it to `false`. In this way the `isValid` variable lets us *remember* whether or not we have detected any problems to date.
 
 After all the tests have been performed we `return isValid`. Remember that `isValid` will either still be `true`, implying that no problems were found and thus will not prevent the submission of the form, or `false`, meaning that at least one problem was found and will stop the form from being submitted.
 =--
